@@ -13,7 +13,7 @@ def searchbook(book,data):
     return -1;
 
 with open(filename,'r') as loadfile:
-    menu = input("Menu , Type 1 : For Enter New Record  , Type 2 : For Show Status , Type 3 : Search , Type 4 : Progress , Type 5 : Delete \n")
+    menu = input("Menu , Type 1 :  Enter New Record  , Type 2 : Show Status , Type 3 : Search , Type 4 : Progress , Type 5 : Delete \n")
     menu = int(menu)
 
     if menu == 1:
@@ -75,7 +75,7 @@ with open(filename,'r') as loadfile:
                 if(number > -1):
                     del(data[number])
                     json.dump(data, outfile)
-                    print(book + " records has been deleted")
+                    print(book + " records have been deleted")
                 else:
                     print("No Records Found")
 
