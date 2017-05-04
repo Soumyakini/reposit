@@ -40,6 +40,14 @@ def print_note(filename):
                     if diff.days <= 5 and diff.days > 0:
                         book_name = each_dict.get('Name','')
                         print("You have",diff.days,"days left to return your book ",book_name)
+                    if diff.days == 0:
+                        book_name = each_dict.get('Name','')
+                        print("The book should be returned today")
+                        print("\n ")
+                    if diff.days < 0:
+                        book_name = each_dict.get('Name','')
+                        print("It is ", abs(diff.days), "days past your return date.")
+                        print("\n ")
                     
             
 with open(filename,'r') as loadfile:
@@ -84,6 +92,7 @@ with open(filename,'r') as loadfile:
                 else:
                     data.append({'Name':book,'Page':page,'Genre':genre})
                 json.dump(data, outfile)
+            ex = input("Do you want to exit? (y/n) ")
             
         elif menu == 2:
             with open(filename, 'r') as fp:
@@ -94,7 +103,9 @@ with open(filename,'r') as loadfile:
                 return_date = each_dict.get('Return date',0)
                 print("Status:")
                 print(book_name, "at Page", page)
-                print("The book has to be returned on ", return_date)
+                if return_date != 0:
+                    print("The book has to be returned on ", return_date)
+            ex = input("Do you want to exit? (y/n) ")
         
         elif menu == 3 :
             with open(filename, 'r') as a:
@@ -108,6 +119,7 @@ with open(filename,'r') as loadfile:
                     sug = data[number]['Genre']
                 else :
                     print (" No Records Found ")
+            ex = input("Do you want to exit? (y/n) ")
             with open(file, 'r') as b:
                     
                 suglist = json.load(b)
@@ -115,7 +127,7 @@ with open(filename,'r') as loadfile:
                                  
                 
             
-            sys.exit();
+            ex = input("Do you want to exit? (y/n) ")
  
         elif menu == 4:
             book = input(" Which book you want to delete , Type *all* to delete all \n")
@@ -133,8 +145,12 @@ with open(filename,'r') as loadfile:
                         print(book + " records has been deleted")
                     else:
                         print("No Records Found")
+            ex = input("Do you want to exit? (y/n) ")
+        if ex == "y":
+            sys.exit()
+            
 
 
 
    
-            sys.exit()
+            
